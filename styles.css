@@ -1,0 +1,368 @@
+/* 基础重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+}
+
+/* 加载动画 */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease-out;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #333;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 头部样式 */
+.header {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-content {
+    max-width: 800px;
+    padding: 0 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.name {
+    font-size: 4rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scroll-indicator span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-bottom: 2px solid #333;
+    border-right: 2px solid #333;
+    transform: rotate(45deg);
+    margin: -10px;
+    animation: scroll 2s infinite;
+}
+
+.scroll-indicator span:nth-child(2) {
+    animation-delay: -0.2s;
+}
+
+.scroll-indicator span:nth-child(3) {
+    animation-delay: -0.4s;
+}
+
+@keyframes scroll {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-20px, -20px);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(20px, 20px);
+    }
+}
+
+/* 导航栏 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.navbar li {
+    margin: 0 15px;
+}
+
+.navbar a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 300;
+    letter-spacing: 1px;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #000;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: #000;
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+/* 内容区域 */
+.section {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-content {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #333;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+    color: #555;
+    max-width: 700px;
+}
+
+/* 作品网格 */
+.work-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.work-item {
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.work-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.work-item p {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* 时间线 */
+.timeline {
+    position: relative;
+    padding-left: 30px;
+    margin-top: 50px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #ddd;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 40px;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -35px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #333;
+}
+
+.timeline-item h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.company {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+/* 联系部分 */
+.contact-links {
+    margin-top: 30px;
+}
+
+.contact-links a {
+    display: block;
+    margin-bottom: 15px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-links a:hover {
+    color: #000;
+}
+
+.contact-links i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* 页脚 */
+.footer {
+    text-align: center;
+    padding: 30px 0;
+    background-color: #f0f0f0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* 动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .name {
+        font-size: 2.5rem;
+    }
+    
+    .title {
+        font-size: 1rem;
+    }
+    
+    .navbar ul {
+        flex-wrap: wrap;
+    }
+    
+    .navbar li {
+        margin: 5px 10px;
+    }
+    
+    .section {
+        padding: 60px 20px;
+    }
+    
+    h2 {
+        font-size: 2rem;
+    }
+}
